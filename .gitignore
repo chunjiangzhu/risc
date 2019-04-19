@@ -1,0 +1,7 @@
+*.pyc
+*.o
+
+Code/buildexe.sh
+Code/__pycache__/*
+Code/test/*
+
