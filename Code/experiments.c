@@ -136,10 +136,7 @@ void writeResults(char* rFname, DataBinary *data, minHeapInttype * solutionHeap,
     minHeapInt_free(solutionHeap);
     FILE *fp=fopen (rFname,"a");
 
-	if (fp) {
-		printf ("The results of the query will be appended to the file : %s\n",rFname);
-		fprintf(fp, "###########################\n");
-	} else
+	if (!fp)
 		perror(rFname);
 
 	if (fp) {
@@ -148,16 +145,13 @@ void writeResults(char* rFname, DataBinary *data, minHeapInttype * solutionHeap,
 
 				int molName = data->molIDsORG[molID];
 				fprintf (fp,"%d\n",molName);
-				printf("%d:%d,%d ", i,molName,molID);
+				//printf("%d:%d,%d ", i,molName,molID);
 			}
-			printf("\n");
 
 			fclose(fp);
 	}
 
 }
-
-int test11(){return 100;}
 
 void _experiments_runRange (void *index, DataBinary *data, DataBinary *dataQueries,
 		double r, int numExp, char *rFname, workerFunctions_type workerFunction) {

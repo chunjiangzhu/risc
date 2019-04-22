@@ -536,15 +536,15 @@ void binaryFingerPrint_run_public () {
 
 DataBinary* readDatabase (char* fNameTarget, char* fNameFeatures) {
 
-	printf ("The target  file is %s\n", fNameTarget);
-	printf ("The features file is %s\n", fNameFeatures);
+	//printf ("The target  file is %s\n", fNameTarget);
+	//printf ("The features file is %s\n", fNameFeatures);
 
 	DataBinary *data;
 
 	int n;
 	arrayListtype *featureIds = _loadFeatureIds (fNameTarget, fNameFeatures, &n); //sorted list of featureids used in the dataset
 
-	printf ("size : %d\n",n);
+	//printf ("size : %d\n",n);
 
 	int alterLoad=0;
 	_loadData_BF (fNameTarget, 	featureIds, &data, n, alterLoad);
@@ -554,14 +554,14 @@ DataBinary* readDatabase (char* fNameTarget, char* fNameFeatures) {
 
 DataBinary* readQueries (char* fNameTarget, char* fNameQueries, char* fNameFeatures) {
 
-	printf ("The queries  file is %s\n", fNameQueries);
+	//printf ("The queries  file is %s\n", fNameQueries);
 
 	DataBinary *dataQueries;
 
 	int n;
 	arrayListtype *featureIds = _loadFeatureIds (fNameTarget, fNameFeatures, &n); //sorted list of featureids used in the dataset
 
-	printf ("size : %d\n",n);
+	//printf ("size : %d\n",n);
 
 	int alterLoad=0;
 	_loadData_BF (fNameQueries, featureIds, &dataQueries, 0, alterLoad);

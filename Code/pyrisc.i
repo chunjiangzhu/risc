@@ -13,4 +13,3 @@ DataBinary* readDatabase (char* fNameTarget, char* fNameFeatures);
 DataBinary* readQueries (char* fNameTarget, char* fNameQueries, char* fNameFeatures);
 void* getIndex(DataBinary *data);
 void writeResults(char* rFname, DataBinary *data, minHeapInttype * solutionHeap, int k);
-int test11();
