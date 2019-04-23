@@ -128,6 +128,12 @@ minHeapInttype * _experiments_runTopK_inMemory (void *index, DataBinary *data, a
 
 void* getIndex(DataBinary *data) {
     workerFunctions_type workerFunction = divideSkip_BF_getWorkerFunction ();
+
+    if (!workerFunction.init_index) {
+		printf ("Not implemented\n");
+		return;
+	}
+
     return workerFunction.init_index (data);
 }
 
@@ -140,8 +146,7 @@ void writeResults(char* rFname, DataBinary *data, minHeapInttype * solutionHeap,
 
 	if (!fp)
 		perror(rFname);
-
-	if (fp) {
+    else {
 			for (int i=0; i<k; i++) {
 				u_long molID = solution[i];
 
