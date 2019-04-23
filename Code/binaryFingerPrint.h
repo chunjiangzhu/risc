@@ -26,5 +26,8 @@ workerFunctions_type linear_BF_getWorkerFunction ();
 
 DataBinary* readDatabase (char* fNameTarget, char* fNameFeatures);
 DataBinary* readQueries (char* fNameTarget, char* fNameQueries, char* fNameFeatures);
+DataBinary** readDatabaseQueries (char* fNameTarget, char* fNameQueries, char* fNameFeatures);
+DataBinary* getData (DataBinary** array);
+DataBinary* getQueries (DataBinary** array);
 
 #endif /* BINARYFINGERPRINT_H_ */

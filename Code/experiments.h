@@ -42,6 +42,5 @@ void notImplemented (void *source, char *fname);
 minHeapInttype * _experiments_runTopK_inMemory (void *index, DataBinary *data, arrayListtype *queryFP, int k);
 void* getIndex(DataBinary *data);
 void writeResults(char* rFname, DataBinary *data, minHeapInttype * solutionHeap, int k);
-int test11();
 
 #endif /* EXPERIMENTS_H_ */
