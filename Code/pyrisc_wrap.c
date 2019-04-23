@@ -3343,6 +3343,7 @@ SWIGINTERN PyObject *_wrap__experiments_runTopK_inMemory(PyObject *SWIGUNUSEDPAR
   DataBinary *arg2 = (DataBinary *) 0 ;
   arrayListtype *arg3 = (arrayListtype *) 0 ;
   int arg4 ;
+  int arg5 ;
   int res1 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
@@ -3350,13 +3351,16 @@ SWIGINTERN PyObject *_wrap__experiments_runTopK_inMemory(PyObject *SWIGUNUSEDPAR
   int res3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
+  PyObject * obj4 = 0 ;
   minHeapInttype *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:_experiments_runTopK_inMemory",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOOOO:_experiments_runTopK_inMemory",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0,SWIG_as_voidptrptr(&arg1), 0, 0);
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "_experiments_runTopK_inMemory" "', argument " "1"" of type '" "void *""'"); 
@@ -3376,7 +3380,12 @@ SWIGINTERN PyObject *_wrap__experiments_runTopK_inMemory(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "_experiments_runTopK_inMemory" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = (int)(val4);
-  result = (minHeapInttype *)_experiments_runTopK_inMemory(arg1,arg2,arg3,arg4);
+  ecode5 = SWIG_AsVal_int(obj4, &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "_experiments_runTopK_inMemory" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = (int)(val5);
+  result = (minHeapInttype *)_experiments_runTopK_inMemory(arg1,arg2,arg3,arg4,arg5);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_minHeapInttype, 0 |  0 );
   return resultobj;
 fail:
@@ -3492,18 +3501,27 @@ fail:
 SWIGINTERN PyObject *_wrap_getIndex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   DataBinary *arg1 = (DataBinary *) 0 ;
+  int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
   void *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:getIndex",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:getIndex",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_DataBinary, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "getIndex" "', argument " "1"" of type '" "DataBinary *""'"); 
   }
   arg1 = (DataBinary *)(argp1);
-  result = (void *)getIndex(arg1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "getIndex" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = (int)(val2);
+  result = (void *)getIndex(arg1,arg2);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
   return resultobj;
 fail:

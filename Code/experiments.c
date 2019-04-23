@@ -96,38 +96,44 @@ void _experiments_runTopK (void *index, DataBinary *data, DataBinary *dataQuerie
 }
 
 minHeapInttype * _experiments_runTopK_inMemory (void *index, DataBinary *data, arrayListtype *queryFP,
-		int k) {
+		int k, int method) {
 	double pruned=0, unPruned=0;
 	int solution[k];
-	workerFunctions_type workerFunction = divideSkip_BF_getWorkerFunction ();
-//	workerFunctions_type workerFunction = invertedIndex_BF_getWorkerFunction ();
 
+    workerFunctions_type workerFunction;
+    if(method == 1)
+		workerFunction = invertedIndex_BF_getWorkerFunction ();
+	else if(method == 2)
+		workerFunction = linear_BF_getWorkerFunction ();
+	else if(method == 3)
+        workerFunction = AOR_BF_getWorkerFunction ();
+	else if(method == 4)
+        workerFunction = divideSkip_BF_getWorkerFunction ();
+	else {
+	    printf ("Unknown method, set method to default RISC\n");
+	    workerFunction = invertedIndex_BF_getWorkerFunction ();
+	}
 
     minHeapInttype *solutionHeap = workerFunction.runTopK (index, queryFP, k, &pruned, &unPruned);
 
-    //minHeapInt_getValues(solutionHeap, solution);
-
-    //minHeapInt_free(solutionHeap);
-
     return solutionHeap;
-
-/*
-    int results[k];
-    for (int i=0; i<k; i++) {
-        u_long molID = solution[i];
-
-        int molName = data->molIDsORG[molID];
-        results[i] = molName;
-        printf("%d:%d ", i,results[i]);
-    }
-    printf("\n");
-    return results;
-    */
 
 }
 
-void* getIndex(DataBinary *data) {
-    workerFunctions_type workerFunction = divideSkip_BF_getWorkerFunction ();
+void* getIndex(DataBinary *data, int method) {
+    workerFunctions_type workerFunction;
+    if(method == 1)
+		workerFunction = invertedIndex_BF_getWorkerFunction ();
+	else if(method == 2)
+		workerFunction = linear_BF_getWorkerFunction ();
+	else if(method == 3)
+        workerFunction = AOR_BF_getWorkerFunction ();
+	else if(method == 4)
+        workerFunction = divideSkip_BF_getWorkerFunction ();
+	else {
+	    printf ("Unknown method, set method to default RISC\n");
+	    workerFunction = invertedIndex_BF_getWorkerFunction ();
+	}
 
     if (!workerFunction.init_index) {
 		printf ("Not implemented\n");

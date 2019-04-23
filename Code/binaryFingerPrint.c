@@ -139,8 +139,6 @@ void _loadData_BF (char *fName, arrayListtype *featureIds,
 	if (n <= 0)
 		n = _dataSize_BF(fName);
 
-	printf("%d\n", n);
-
 	//initialize the data
 	DataBinary *data = new_dataBinary(n, featureIds->size);
 

@@ -100,8 +100,8 @@ def dataBinary_getFingerPrint(data, index):
     return _pyrisc.dataBinary_getFingerPrint(data, index)
 dataBinary_getFingerPrint = _pyrisc.dataBinary_getFingerPrint
 
-def _experiments_runTopK_inMemory(index, data, queryFP, k):
-    return _pyrisc._experiments_runTopK_inMemory(index, data, queryFP, k)
+def _experiments_runTopK_inMemory(index, data, queryFP, k, mode):
+    return _pyrisc._experiments_runTopK_inMemory(index, data, queryFP, k, mode)
 _experiments_runTopK_inMemory = _pyrisc._experiments_runTopK_inMemory
 
 def getFeatureId(fNameTarget, featureIds):
@@ -116,8 +116,8 @@ def readQueries(fNameQueries, featureIds):
     return _pyrisc.readQueries(fNameQueries, featureIds)
 readQueries = _pyrisc.readQueries
 
-def getIndex(data):
-    return _pyrisc.getIndex(data)
+def getIndex(data, mode):
+    return _pyrisc.getIndex(data, mode)
 getIndex = _pyrisc.getIndex
 
 def writeResults(rFname, data, solutionHeap, k):

@@ -39,8 +39,8 @@ void experiments_work_small 	(DataSmall  *data, 		DataSmall  *dataQueries, 	char
 void experiments_nonBinary_work (DataNonBinary *data, 	DataNonBinary *dataQueries, char *rnamePartial);
 void notImplemented (void *source, char *fname);
 
-minHeapInttype * _experiments_runTopK_inMemory (void *index, DataBinary *data, arrayListtype *queryFP, int k);
-void* getIndex(DataBinary *data);
+minHeapInttype * _experiments_runTopK_inMemory (void *index, DataBinary *data, arrayListtype *queryFP, int k, int mode);
+void* getIndex(DataBinary *data, int mode);
 void writeResults(char* rFname, DataBinary *data, minHeapInttype * solutionHeap, int k);
 
 #endif /* EXPERIMENTS_H_ */
