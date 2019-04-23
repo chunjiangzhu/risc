@@ -99,7 +99,9 @@ minHeapInttype * _experiments_runTopK_inMemory (void *index, DataBinary *data, a
 		int k) {
 	double pruned=0, unPruned=0;
 	int solution[k];
-	workerFunctions_type workerFunction = invertedIndex_BF_getWorkerFunction ();
+	workerFunctions_type workerFunction = divideSkip_BF_getWorkerFunction ();
+//	workerFunctions_type workerFunction = invertedIndex_BF_getWorkerFunction ();
+
 
     minHeapInttype *solutionHeap = workerFunction.runTopK (index, queryFP, k, &pruned, &unPruned);
 
@@ -125,7 +127,7 @@ minHeapInttype * _experiments_runTopK_inMemory (void *index, DataBinary *data, a
 }
 
 void* getIndex(DataBinary *data) {
-    workerFunctions_type workerFunction = invertedIndex_BF_getWorkerFunction ();
+    workerFunctions_type workerFunction = divideSkip_BF_getWorkerFunction ();
     return workerFunction.init_index (data);
 }
 
