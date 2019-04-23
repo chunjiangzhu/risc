@@ -534,66 +534,68 @@ void binaryFingerPrint_run_public () {
 	experiments_work (data, dataQueries, rNamePartial);
 }
 
-DataBinary* readDatabase (char* fNameTarget, char* fNameFeatures) {
+arrayListtype * getFeatureId (char* fNameTarget, char* fNameFeatures) {
+    int n;
+    return _loadFeatureIds (fNameTarget, fNameFeatures, &n);
+}
+
+DataBinary* readDatabase (char* fNameTarget, arrayListtype *featureIds) {
 
 	//printf ("The target  file is %s\n", fNameTarget);
 	//printf ("The features file is %s\n", fNameFeatures);
 
 	DataBinary *data;
 
-	int n;
-	arrayListtype *featureIds = _loadFeatureIds (fNameTarget, fNameFeatures, &n); //sorted list of featureids used in the dataset
-
-	//printf ("size : %d\n",n);
-
 	int alterLoad=0;
-	_loadData_BF (fNameTarget, 	featureIds, &data, n, alterLoad);
+	_loadData_BF (fNameTarget, 	featureIds, &data, 0, alterLoad);
 	dataBinary_sort (data);
 	return data;
 }
 
-DataBinary* readQueries (char* fNameTarget, char* fNameQueries, char* fNameFeatures) {
+DataBinary* readQueries (char* fNameQueries, arrayListtype *featureIds) {
 
 	//printf ("The queries  file is %s\n", fNameQueries);
 
 	DataBinary *dataQueries;
-
-	int n;
-	arrayListtype *featureIds = _loadFeatureIds (fNameTarget, fNameFeatures, &n); //sorted list of featureids used in the dataset
-
-	//printf ("size : %d\n",n);
 
 	int alterLoad=0;
 	_loadData_BF (fNameQueries, featureIds, &dataQueries, 0, alterLoad);
 	return dataQueries;
 }
 
-DataBinary** readDatabaseQueries (char* fNameTarget, char* fNameQueries, char* fNameFeatures) {
-
-	//printf ("The target  file is %s\n", fNameTarget);
-	//printf ("The features file is %s\n", fNameFeatures);
-
-    DataBinary** array = (DataBinary**)malloc(2*sizeof(DataBinary));
-
-	int n;
-	arrayListtype *featureIds = _loadFeatureIds (fNameTarget, fNameFeatures, &n); //sorted list of featureids used in the dataset
-
-	//printf ("size : %d\n",n);
-
-	int alterLoad=0;
-	_loadData_BF (fNameQueries, featureIds, &(array[1]), 0, alterLoad);
-	_loadData_BF (fNameTarget, 	featureIds, &(array[0]), n, alterLoad);
-	dataBinary_sort (array[0]);
-	return array;
-}
-
-DataBinary* getData (DataBinary** array) {
-    return array[0];
-}
-
-DataBinary* getQueries (DataBinary** array) {
-    return array[1];
-}
+//DataBinary* readDatabase (char* fNameTarget, char* fNameFeatures) {
+//
+//	//printf ("The target  file is %s\n", fNameTarget);
+//	//printf ("The features file is %s\n", fNameFeatures);
+//
+//	DataBinary *data;
+//
+//	int n;
+//	arrayListtype *featureIds = _loadFeatureIds (fNameTarget, fNameFeatures, &n); //sorted list of featureids used in the dataset
+//
+//	//printf ("size : %d\n",n);
+//
+//	int alterLoad=0;
+//	_loadData_BF (fNameTarget, 	featureIds, &data, n, alterLoad);
+//	dataBinary_sort (data);
+//	return data;
+//}
+//
+//DataBinary* readQueries (char* fNameTarget, char* fNameQueries, char* fNameFeatures) {
+//
+//	//printf ("The queries  file is %s\n", fNameQueries);
+//
+//	DataBinary *dataQueries;
+//
+//	int n;
+//	arrayListtype *featureIds = _loadFeatureIds (fNameTarget, fNameFeatures, &n); //sorted list of featureids used in the dataset
+//
+//	//printf ("size : %d\n",n);
+//
+//	int alterLoad=0;
+//	_loadData_BF (fNameQueries, featureIds, &dataQueries, 0, alterLoad);
+//	return dataQueries;
+//}
 
 void* _linear_BFinit_index (DataBinary *data) {
 	return data;

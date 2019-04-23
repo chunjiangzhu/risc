@@ -24,10 +24,8 @@ void runLinear_BF (DataBinary *data, DataBinary *dataQueries, char *rnamePartial
 
 workerFunctions_type linear_BF_getWorkerFunction ();
 
-DataBinary* readDatabase (char* fNameTarget, char* fNameFeatures);
-DataBinary* readQueries (char* fNameTarget, char* fNameQueries, char* fNameFeatures);
-DataBinary** readDatabaseQueries (char* fNameTarget, char* fNameQueries, char* fNameFeatures);
-DataBinary* getData (DataBinary** array);
-DataBinary* getQueries (DataBinary** array);
+arrayListtype * getFeatureId (char* fNameTarget, char* featureIds);
+DataBinary* readDatabase (char* fNameTarget, arrayListtype *featureIds);
+DataBinary* readQueries (char* fNameQueries, arrayListtype *featureIds);
 
 #endif /* BINARYFINGERPRINT_H_ */
