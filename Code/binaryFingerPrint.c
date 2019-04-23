@@ -231,7 +231,7 @@ void _loadData_BF (char *fName, arrayListtype *featureIds,
 	minHeapPlain_free(minHeap_new);
 	minHeapPlain_free(minHeap_old);
 
-	printf("\n");
+//	printf("\n");
 	free(buffer);
 	fclose(fp);
 	*data_org = data;
