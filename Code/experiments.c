@@ -230,6 +230,54 @@ void _experiments_runRange (void *index, DataBinary *data, DataBinary *dataQueri
 		fclose(fp);
 }
 
+arrayListtype * _experiments_runRange_InMemory (void *index, DataBinary *data, arrayListtype *queryFP,
+		double r, int method) {
+	G_LOCATION;
+
+	double pruned=0, unPruned=0;
+
+	workerFunctions_type workerFunction;
+    if(method == 1)
+		workerFunction = invertedIndex_BF_getWorkerFunction ();
+	else if(method == 2)
+		workerFunction = linear_BF_getWorkerFunction ();
+	else if(method == 3)
+        workerFunction = AOR_BF_getWorkerFunction ();
+	else if(method == 4)
+        workerFunction = divideSkip_BF_getWorkerFunction ();
+	else {
+	    printf ("Unknown method, set method to default RISC\n");
+	    workerFunction = invertedIndex_BF_getWorkerFunction ();
+	}
+
+	arrayListtype *solutionList =  workerFunction.runRange (index, queryFP , r, &pruned, &unPruned);
+
+    return solutionList;
+}
+
+void writeResults_Range(char* rFname, DataBinary *data, arrayListtype *solutionList) {
+    FILE *fp=fopen (rFname,"a");
+
+	if (!fp)
+		perror(rFname);
+    else {
+        arrayList_Iterator_type *iterator = arrayList_getIterator(solutionList);
+
+        fprintf (fp,"Solution to queryID %d\n",queryIndex);
+        while (iterator->nextAvailable) {
+            u_long molID = arrayList_IteratorGetNext(iterator);
+
+            int molName = data->molIDsORG[molID];
+            fprintf (fp,"%d\n",molName);
+        }
+
+        arrayList_IteratorFree(iterator);
+
+        fclose(fp);
+	}
+    free_arrayListtype(solutionList);
+}
+
  void _experiments_runTopK_NB (void *index, DataNonBinary *data, DataNonBinary *dataQueries,
 		 int k, int numExp, char *rFname, workerFunctions_NB_type workerFunction) {
 	G_LOCATION;
@@ -770,3 +818,4 @@ void experiments_work_small (DataSmall *data, DataSmall *dataQueries, char *fNam
 		_experiments_work_helper_small(data, dataQueries, workerFunction, rNamePartial);
 	}
 }
+
