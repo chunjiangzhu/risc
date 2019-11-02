@@ -263,7 +263,6 @@ void writeResults_Range(char* rFname, DataBinary *data, arrayListtype *solutionL
     else {
         arrayList_Iterator_type *iterator = arrayList_getIterator(solutionList);
 
-        fprintf (fp,"Solution to queryID %d\n",queryIndex);
         while (iterator->nextAvailable) {
             u_long molID = arrayList_IteratorGetNext(iterator);
 
@@ -818,4 +817,5 @@ void experiments_work_small (DataSmall *data, DataSmall *dataQueries, char *fNam
 		_experiments_work_helper_small(data, dataQueries, workerFunction, rNamePartial);
 	}
 }
+
 
