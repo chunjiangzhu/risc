@@ -23,4 +23,8 @@ void nonBinaryFingerPrint_run (enum options_datasetTypes d);
 workerFunctions_NB_type linear_NBF_getWorkerFunction ();
 workerFunctions_NB_type invertedIndex_NBF_getWorkerFunction ();
 
+arrayListtype * getFeatureId_NB (char* fNameTarget, char* fNameFeatures);
+DataNonBinary* readDatabase_NB (char* fNameTarget, arrayListtype *featureIds);
+DataNonBinary* readQueries_NB (char* fNameQueries, arrayListtype *featureIds);
+
 #endif /* NONBINARYFINGERPRINT_H_ */

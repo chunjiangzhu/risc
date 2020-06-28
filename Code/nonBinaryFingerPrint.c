@@ -420,6 +420,36 @@ void nonBinaryFingerPrint_run_public () {
 	experiments_nonBinary_work (data, dataQueries, rNamePartial);
 }
 
+arrayListtype * getFeatureId_NB (char* fNameTarget, char* fNameFeatures) {
+    int n;
+	int loadFromDir =0;
+
+	return _loadFeatureIds_NBF (fNameTarget, fNameFeatures, &n, loadFromDir);
+}
+
+DataNonBinary* readDatabase_NB (char* fNameTarget, arrayListtype *featureIds) {
+
+	//printf ("The target  file is %s\n", fNameTarget);
+	//printf ("The features file is %s\n", fNameFeatures);
+
+	DataNonBinary *data;
+
+	int loadFromDir =0;
+	_loadData_NBF (fNameTarget,	featureIds, &data, n, loadFromDir);
+	dataNonBinary_sort (data);
+	return data;
+}
+
+DataNonBinary* readQueries_NB (char* fNameQueries, arrayListtype *featureIds) {
+
+	//printf ("The queries  file is %s\n", fNameQueries);
+
+	DataNonBinary *dataQueries;
+
+	_loadData_NBF (fNameQueries,featureIds, &dataQueries, 0, 0);
+	return dataQueries;
+}
+
 /*****************************************************************/
 /*********              Linear                  ******************/
 /*****************************************************************/

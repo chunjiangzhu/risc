@@ -39,11 +39,17 @@ void experiments_work_small 	(DataSmall  *data, 		DataSmall  *dataQueries, 	char
 void experiments_nonBinary_work (DataNonBinary *data, 	DataNonBinary *dataQueries, char *rnamePartial);
 void notImplemented (void *source, char *fname);
 
-minHeapInttype * _experiments_runTopK_inMemory (void *index, DataBinary *data, arrayListtype *queryFP, int k, int mode);
-arrayListtype * _experiments_runRange_InMemory (void *index, DataBinary *data, arrayListtype *queryFP, double r, int mode);
+minHeapInttype * _experiments_runTopK_inMemory (void *index, arrayListtype *queryFP, int k, int mode);
+minHeapInttype * _experiments_runTopK_NB_inMemory (void *index, arrayListtype *queryFP, int k, int method);
+arrayListtype * _experiments_runRange_InMemory (void *index, arrayListtype *queryFP, double r, int mode);
+arrayListtype * _experiments_runRange_NB_InMemory (void *index, arrayListtype *queryFP, double r, int method);
+
 void* getIndex(DataBinary *data, int mode);
+void* getIndex_NB(DataNonBinary *data, int method);
 void writeResults(char* rFname, DataBinary *data, minHeapInttype * solutionHeap, int k);
+void writeResults_NB(char* rFname, DataNonBinary *data, minHeapInttype * solutionHeap, int k);
 void writeResults_Range(char* rFname, DataBinary *data, arrayListtype *solutionList);
+void writeResults_NB_Range(char* rFname, DataNonBinary *data, arrayListtype *solutionList);
 
 #endif /* EXPERIMENTS_H_ */
 

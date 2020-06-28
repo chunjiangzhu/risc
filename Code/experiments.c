@@ -95,10 +95,9 @@ void _experiments_runTopK (void *index, DataBinary *data, DataBinary *dataQuerie
 		fclose(fp);
 }
 
-minHeapInttype * _experiments_runTopK_inMemory (void *index, DataBinary *data, arrayListtype *queryFP,
+minHeapInttype * _experiments_runTopK_inMemory (void *index, arrayListtype *queryFP,
 		int k, int method) {
 	double pruned=0, unPruned=0;
-	int solution[k];
 
     workerFunctions_type workerFunction;
     if(method == 1)
@@ -230,7 +229,7 @@ void _experiments_runRange (void *index, DataBinary *data, DataBinary *dataQueri
 		fclose(fp);
 }
 
-arrayListtype * _experiments_runRange_InMemory (void *index, DataBinary *data, arrayListtype *queryFP,
+arrayListtype * _experiments_runRange_InMemory (void *index, arrayListtype *queryFP,
 		double r, int method) {
 	G_LOCATION;
 
@@ -335,6 +334,73 @@ void writeResults_Range(char* rFname, DataBinary *data, arrayListtype *solutionL
 		fclose(fp);
 }
 
+minHeapInttype * _experiments_runTopK_NB_inMemory (void *index, arrayListtype *queryFP,
+		int k, int method) {
+	double pruned=0, unPruned=0;
+
+    workerFunctions_NB_type workerFunction;
+    if(method == 1)
+		workerFunction = invertedIndex_NBF_getWorkerFunction ();
+	else if(method == 2)
+		workerFunction = linear_NBF_getWorkerFunction ();
+	else if(method == 3 | method == 4) {
+        printf ("This indexing scheme is not implemented, set method to default RISC\n");
+        workerFunction = invertedIndex_NBF_getWorkerFunction ();
+    } else {
+	    printf ("Unknown method, set method to default RISC\n");
+	    workerFunction = invertedIndex_NBF_getWorkerFunction ();
+	}
+
+    minHeapInttype *solutionHeap = workerFunction.runTopK (index, queryFP, k, &pruned, &unPruned);
+
+    return solutionHeap;
+
+}
+
+void* getIndex_NB(DataNonBinary *data, int method) {
+    workerFunctions_NB_type workerFunction;
+    if(method == 1)
+		workerFunction = invertedIndex_NBF_getWorkerFunction ();
+	else if(method == 2)
+		workerFunction = linear_NBF_getWorkerFunction ();
+	else if(method == 3 | method == 4) {
+        printf ("This indexing scheme is not implemented, set method to default RISC\n");
+        workerFunction = invertedIndex_NBF_getWorkerFunction ();
+    } else {
+	    printf ("Unknown method, set method to default RISC\n");
+	    workerFunction = invertedIndex_NBF_getWorkerFunction ();
+	}
+
+    if (!workerFunction.init_index) {
+		printf ("Not implemented\n");
+		return;
+	}
+
+    return workerFunction.init_index (data);
+}
+
+void writeResults_NB(char* rFname, DataNonBinary *data, minHeapInttype * solutionHeap, int k) {
+    int solution[k];
+    minHeapInt_getValues(solutionHeap, solution);
+
+    minHeapInt_free(solutionHeap);
+    FILE *fp=fopen (rFname,"a");
+
+	if (!fp)
+		perror(rFname);
+    else {
+			for (int i=0; i<k; i++) {
+				u_long molID = soultion[i];
+
+				char *molName = data->ids[molID];
+				fprintf (fp,"%s\n",molName);
+			}
+
+			fclose(fp);
+	}
+
+}
+
 void _experiments_runRange_NB (void *index, DataNonBinary *data, DataNonBinary *dataQueries,
 		double r, int numExp, char *rFname, workerFunctions_NB_type workerFunction) {
 	G_LOCATION;
@@ -392,6 +458,52 @@ void _experiments_runRange_NB (void *index, DataNonBinary *data, DataNonBinary *
 
 	if (fp)
 		fclose(fp);
+}
+
+arrayListtype * _experiments_runRange_NB_InMemory (void *index, arrayListtype *queryFP,
+		double r, int method) {
+	G_LOCATION;
+
+	double pruned=0, unPruned=0;
+
+	workerFunctions_NB_type workerFunction;
+    if(method == 1)
+		workerFunction = invertedIndex_NBF_getWorkerFunction ();
+	else if(method == 2)
+		workerFunction = linear_NBF_getWorkerFunction ();
+	else if(method == 3 | method == 4) {
+        printf ("This indexing scheme is not implemented, set method to default RISC\n");
+        workerFunction = invertedIndex_NBF_getWorkerFunction ();
+    } else {
+	    printf ("Unknown method, set method to default RISC\n");
+	    workerFunction = invertedIndex_NBF_getWorkerFunction ();
+	}
+
+	arrayListtype *solutionList =  workerFunction.runRange (index, queryFP , r, &pruned, &unPruned);
+
+    return solutionList;
+}
+
+void writeResults_NB_Range(char* rFname, DataNonBinary *data, arrayListtype *solutionList) {
+    FILE *fp=fopen (rFname,"a");
+
+	if (!fp)
+		perror(rFname);
+    else {
+        arrayList_Iterator_type *iterator = arrayList_getIterator(solutionList);
+
+        while (iterator->nextAvailable) {
+            u_long molID = arrayList_IteratorGetNext(iterator);
+
+            char *molName = data->ids[molID];
+            fprintf (fp,"%s\n",molName);
+        }
+
+        arrayList_IteratorFree(iterator);
+
+        fclose(fp);
+	}
+    free_arrayListtype(solutionList);
 }
 
 void _experiments_runTopK_small (void *index, DataSmall *data, DataSmall *dataQueries, int k,
@@ -817,5 +929,4 @@ void experiments_work_small (DataSmall *data, DataSmall *dataQueries, char *fNam
 		_experiments_work_helper_small(data, dataQueries, workerFunction, rNamePartial);
 	}
 }
-
 
