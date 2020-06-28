@@ -1,6 +1,7 @@
 %module pyrisc
 %{
 /* Put header files here or function declarations like below */
+
 #include "binaryFingerPrint.h"
 #include "nonBinaryFingerPrint.h"
 #include "experiments.h"
@@ -10,7 +11,7 @@
 %}
 
 arrayListtype*  dataBinary_getFingerPrint(DataBinary *data, int index);
-MolNonBinary* 	dataNonBinary_getFingerPrint (DataNonBinary *data, u_long index);
+MolNonBinary* 	dataNonBinary_getFingerPrint (DataNonBinary *data, unsigned long index);
 minHeapInttype * _experiments_runTopK_inMemory (void *index, arrayListtype *queryFP, int k, int mode);
 minHeapInttype * _experiments_runTopK_NB_inMemory (void *index, arrayListtype *queryFP, int k, int method);
 arrayListtype * _experiments_runRange_InMemory (void *index, arrayListtype *queryFP, double r, int mode);
