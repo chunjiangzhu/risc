@@ -434,6 +434,7 @@ DataNonBinary* readDatabase_NB (char* fNameTarget, arrayListtype *featureIds) {
 
 	DataNonBinary *data;
 
+    int n;
 	int loadFromDir =0;
 	_loadData_NBF (fNameTarget,	featureIds, &data, n, loadFromDir);
 	dataNonBinary_sort (data);

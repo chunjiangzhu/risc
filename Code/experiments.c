@@ -390,7 +390,7 @@ void writeResults_NB(char* rFname, DataNonBinary *data, minHeapInttype * solutio
 		perror(rFname);
     else {
 			for (int i=0; i<k; i++) {
-				u_long molID = soultion[i];
+				u_long molID = solution[i];
 
 				char *molName = data->ids[molID];
 				fprintf (fp,"%s\n",molName);
