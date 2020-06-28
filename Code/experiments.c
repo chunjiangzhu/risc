@@ -334,7 +334,7 @@ void writeResults_Range(char* rFname, DataBinary *data, arrayListtype *solutionL
 		fclose(fp);
 }
 
-minHeapInttype * _experiments_runTopK_NB_inMemory (void *index, arrayListtype *queryFP,
+minHeapInttype * _experiments_runTopK_NB_inMemory (void *index, MolNonBinary *queryFP,
 		int k, int method) {
 	double pruned=0, unPruned=0;
 
@@ -460,7 +460,7 @@ void _experiments_runRange_NB (void *index, DataNonBinary *data, DataNonBinary *
 		fclose(fp);
 }
 
-arrayListtype * _experiments_runRange_NB_InMemory (void *index, arrayListtype *queryFP,
+arrayListtype * _experiments_runRange_NB_InMemory (void *index, MolNonBinary *queryFP,
 		double r, int method) {
 	G_LOCATION;
 
