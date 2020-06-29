@@ -95,7 +95,7 @@ void _experiments_runTopK (void *index, DataBinary *data, DataBinary *dataQuerie
 		fclose(fp);
 }
 
-minHeapInttype * _experiments_runTopK_inMemory (void *index, arrayListtype *queryFP,
+minHeapInttype * _experiments_runTopK_inMemory (void *index, DataBinary *data, arrayListtype *queryFP,
 		int k, int method) {
 	double pruned=0, unPruned=0;
 
@@ -229,7 +229,7 @@ void _experiments_runRange (void *index, DataBinary *data, DataBinary *dataQueri
 		fclose(fp);
 }
 
-arrayListtype * _experiments_runRange_InMemory (void *index, arrayListtype *queryFP,
+arrayListtype * _experiments_runRange_InMemory (void *index, DataBinary *data, arrayListtype *queryFP,
 		double r, int method) {
 	G_LOCATION;
 

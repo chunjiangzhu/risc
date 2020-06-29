@@ -12,9 +12,9 @@
 
 arrayListtype*  dataBinary_getFingerPrint(DataBinary *data, int index);
 MolNonBinary* 	dataNonBinary_getFingerPrint (DataNonBinary *data, unsigned long index);
-minHeapInttype * _experiments_runTopK_inMemory (void *index, arrayListtype *queryFP, int k, int mode);
+minHeapInttype * _experiments_runTopK_inMemory (void *index, DataBinary *data, arrayListtype *queryFP, int k, int mode);
 minHeapInttype * _experiments_runTopK_NB_inMemory (void *index, MolNonBinary *queryFP, int k, int method);
-arrayListtype * _experiments_runRange_InMemory (void *index, arrayListtype *queryFP, double r, int mode);
+arrayListtype * _experiments_runRange_InMemory (void *index, DataBinary *data, arrayListtype *queryFP, double r, int mode);
 arrayListtype * _experiments_runRange_NB_InMemory (void *index, MolNonBinary *queryFP, double r, int method);
 
 arrayListtype * getFeatureId (char* fNameTarget, char* featureIds);
